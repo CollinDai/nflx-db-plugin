@@ -15,9 +15,7 @@
   "content_scripts": [
     {
       "matches": [
-        "*://*.YOUR-TARGET-SITE.com/mv*",
-        "*://*.YOUR-TARGET-SITE.com/tv*",
-        "*://*.YOUR-TARGET-SITE.com/ac*"
+        "*://*/*"
       ],
       "js": [
         "content.js"

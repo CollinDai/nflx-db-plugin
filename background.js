@@ -5,6 +5,7 @@
 // ==========================================
 var TMDB_API_KEY = "YOUR_TMDB_API_KEY"; // <-- REPLACE WITH YOUR FREE TMDB API KEY
 var REGION = "US";                      // <-- CHOOSE YOUR NETFLIX REGION (e.g. "US", "GB", "KR", "CN")
+var TARGET_DOMAIN = "";                 // <-- OPTIONAL: SET TARGET DOMAIN IN config.js (GIT-IGNORED)
 
 // Optional local configuration override (git-ignored)
 try {
@@ -19,6 +20,16 @@ console.log("Netflix Checker Background Worker Loaded. Active region:", REGION);
 // Listener for messages from content.js
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log("Background received message:", request);
+
+  if (request.action === "shouldRunOnSite") {
+    const hostname = request.hostname || "";
+    if (TARGET_DOMAIN && !hostname.includes(TARGET_DOMAIN)) {
+      sendResponse({ shouldRun: false });
+    } else {
+      sendResponse({ shouldRun: true });
+    }
+    return false;
+  }
 
   if (request.action === "checkNetflixAvailability") {
     const { title, year, type } = request;

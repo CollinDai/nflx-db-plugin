@@ -228,30 +228,36 @@ function injectToggleFilter() {
 
 // Initialize content script
 function init() {
-  console.log("Initializing extension script scanning...");
-  // Inject the floating switch UI
-  injectToggleFilter();
-  
-  // Run initial scan
-  scanAndProcessCards();
+  chrome.runtime.sendMessage({ action: "shouldRunOnSite", hostname: window.location.hostname }, (response) => {
+    if (chrome.runtime.lastError || !response || !response.shouldRun) {
+      return; // Exit silently if current domain is not targeted in config.js
+    }
 
-  // Watch for dynamic DOM changes (Vue renders pagination and filters asynchronously)
-  let debounceTimer;
-  const observer = new MutationObserver((mutations) => {
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => {
-      console.log("DOM mutated, rescanning...");
-      scanAndProcessCards();
-      
-      // Re-inject toggle switch if Vue navigation replaced the body structure
-      injectToggleFilter();
-    }, 300); // Debounce to group batch card mutations
+    console.log("Initializing extension script scanning...");
+    // Inject the floating switch UI
+    injectToggleFilter();
+    
+    // Run initial scan
+    scanAndProcessCards();
+
+    // Watch for dynamic DOM changes (Vue renders pagination and filters asynchronously)
+    let debounceTimer;
+    const observer = new MutationObserver((mutations) => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        console.log("DOM mutated, rescanning...");
+        scanAndProcessCards();
+        
+        // Re-inject toggle switch if Vue navigation replaced the body structure
+        injectToggleFilter();
+      }, 300); // Debounce to group batch card mutations
+    });
+
+    const config = { childList: true, subtree: true };
+    const targetNode = document.body;
+    observer.observe(targetNode, config);
+    console.log("Mutation observer started on document body");
   });
-
-  const config = { childList: true, subtree: true };
-  const targetNode = document.body;
-  observer.observe(targetNode, config);
-  console.log("Mutation observer started on document body");
 }
 
 // Wait for the DOM to load before running
