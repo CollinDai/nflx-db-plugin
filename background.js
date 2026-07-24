@@ -3,8 +3,15 @@
 // ==========================================
 // CONFIGURATION
 // ==========================================
-const TMDB_API_KEY = "YOUR_TMDB_API_KEY"; // <-- REPLACE WITH YOUR FREE TMDB API KEY
-const REGION = "US";                      // <-- CHOOSE YOUR NETFLIX REGION (e.g. "US", "GB", "KR", "CN")
+var TMDB_API_KEY = "YOUR_TMDB_API_KEY"; // <-- REPLACE WITH YOUR FREE TMDB API KEY
+var REGION = "US";                      // <-- CHOOSE YOUR NETFLIX REGION (e.g. "US", "GB", "KR", "CN")
+
+// Optional local configuration override (git-ignored)
+try {
+  importScripts("config.js");
+} catch (e) {
+  // config.js is optional
+}
 // ==========================================
 
 console.log("Netflix Checker Background Worker Loaded. Active region:", REGION);

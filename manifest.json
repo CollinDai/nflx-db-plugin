@@ -15,9 +15,7 @@
   "content_scripts": [
     {
       "matches": [
-        "*://*/*/mv*",
-        "*://*/*/tv*",
-        "*://*/*/ac*"
+        "*://*/*"
       ],
       "js": [
         "content.js"
