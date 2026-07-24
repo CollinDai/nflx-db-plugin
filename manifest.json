@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Netflix Availability Checker",
+  "version": "1.0.0",
+  "description": "Checks if movies, TV shows, and anime on target media sites are available on Netflix and adds direct links.",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://api.themoviedb.org/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*/mv*",
+        "*://*/*/tv*",
+        "*://*/*/ac*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ]
+    }
+  ]
+}

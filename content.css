@@ -1,0 +1,191 @@
+/* Netflix Availability Checker - Content Styles */
+
+.nflx-badge-container {
+  display: flex;
+  margin-top: 6px;
+  align-items: center;
+}
+
+.nflx-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+/* Available State */
+.nflx-badge.nflx-available {
+  background: rgba(229, 9, 20, 0.12) !important;
+  border: 1px solid rgba(229, 9, 20, 0.5) !important;
+  color: #ff3a44 !important;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(229, 9, 20, 0.05);
+}
+
+.nflx-badge.nflx-available:hover {
+  background: #e50914 !important;
+  border-color: #e50914 !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(229, 9, 20, 0.45);
+}
+
+.nflx-badge.nflx-available svg {
+  fill: currentColor;
+  width: 10px;
+  height: 12px;
+  transition: transform 0.2s ease;
+}
+
+.nflx-badge.nflx-available:hover svg {
+  transform: scale(1.1);
+}
+
+/* Not Available State (Subtle) */
+.nflx-badge.nflx-unavailable {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #777777 !important;
+  cursor: default;
+  font-weight: 500;
+}
+
+/* Overlay Style (Placed directly on the cover container) */
+.li-img.cover {
+  position: relative !important;
+}
+
+.nflx-cover-overlay {
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  z-index: 999 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 24px !important;
+  height: 24px !important;
+  background: #e50914 !important;
+  border-radius: 50% !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+  transition: all 0.2s ease !important;
+  opacity: 0.9 !important;
+  cursor: pointer !important;
+}
+
+.nflx-cover-overlay:hover {
+  transform: scale(1.1) !important;
+  opacity: 1 !important;
+  box-shadow: 0 4px 12px rgba(229, 9, 20, 0.6) !important;
+}
+
+.nflx-cover-overlay svg {
+  fill: #ffffff !important;
+  width: 10px !important;
+  height: 12px !important;
+}
+
+/* Filter behavior: Hide unavailable movie cards when active */
+body.nflx-filter-active .nflx-card-unavailable {
+  display: none !important;
+}
+
+/* Floating Toggle Container */
+.nflx-toggle-wrapper {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  z-index: 100000 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 10px 16px !important;
+  background: rgba(15, 15, 26, 0.85) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 50px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+  color: #ffffff !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  user-select: none !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.nflx-toggle-wrapper:hover {
+  background: rgba(20, 20, 35, 0.95) !important;
+  border-color: rgba(229, 9, 20, 0.3) !important;
+  transform: translateY(-2px) !important;
+}
+
+.nflx-toggle-label {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  cursor: pointer !important;
+}
+
+.nflx-toggle-label svg {
+  fill: #e50914 !important;
+  width: 14px !important;
+  height: 14px !important;
+}
+
+/* Switch styling */
+.nflx-switch {
+  position: relative !important;
+  display: inline-block !important;
+  width: 38px !important;
+  height: 20px !important;
+}
+
+.nflx-switch input {
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.nflx-slider {
+  position: absolute !important;
+  cursor: pointer !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background-color: #333344 !important;
+  transition: .3s !important;
+  border-radius: 20px !important;
+}
+
+.nflx-slider:before {
+  position: absolute !important;
+  content: "" !important;
+  height: 14px !important;
+  width: 14px !important;
+  left: 3px !important;
+  bottom: 3px !important;
+  background-color: white !important;
+  transition: .3s !important;
+  border-radius: 50% !important;
+}
+
+input:checked + .nflx-slider {
+  background-color: #e50914 !important;
+}
+
+input:focus + .nflx-slider {
+  box-shadow: 0 0 1px #e50914 !important;
+}
+
+input:checked + .nflx-slider:before {
+  transform: translateX(18px) !important;
+}
